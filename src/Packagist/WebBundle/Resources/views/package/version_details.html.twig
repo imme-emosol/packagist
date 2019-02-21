@@ -14,11 +14,13 @@
     {% for types in [["require", "devRequire", "suggest", "provide", "conflict", "replace"]] %}
         <div class="row">
             {% for type in types %}
+                {# is unset outside for-loop #}
+                {% set versionTypeLength = attribute(version, type)|length %}
                 {% if loop.index0 is even %}<div class="clearfix visible-sm-block"></div>{% endif %}
                 {% if loop.index0 % 3 == 0 %}<div class="clearfix visible-md-block visible-lg-block"></div>{% endif %}
-                <div class="{{ type }}s col-sm-6 col-md-4 {% if not attribute(version, type)|length %}hidden-xs{% endif %}">
+                <div class="{{ type }}s col-sm-6 col-md-4{{ not versionTypeLength ? ' hidden-xs' }}">
                     <p class="link-type">{{ ('link_type.' ~ type)|trans }}</p>
-                    {% if attribute(version, type)|length %}
+                    {% if versionTypeLength %}
                         <ul>
                             {%- for link in attribute(version, type) -%}
                                 <li>{{ packagist.packageLink(link.packageName, type) }}: {{ link.packageVersion == 'self.version' ? version.version : link.packageVersion }}</li>
