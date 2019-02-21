@@ -28,12 +28,12 @@ signinbox:
      register: No account yet? Create one now!
 
 link_type:
-    require: Requires
-    devRequire: Requires (Dev)
-    suggest: Suggests
-    conflict: Conflicts
-    replace: Replaces
-    provide: Provides
+    require: "%amount% Requires"
+    devRequire: "%amount% Requires (Dev)"
+    suggest: "%amount% Suggests"
+    conflict: "%amount% Conflicts"
+    replace: "%amount% Replaces"
+    provide: "%amount% Provides"
 
 listing:
     title: Packages
