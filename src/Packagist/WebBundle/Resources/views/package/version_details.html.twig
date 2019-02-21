@@ -20,14 +20,14 @@
                 {% if loop.index0 % 3 == 0 %}<div class="clearfix visible-md-block visible-lg-block"></div>{% endif %}
                 <div class="{{ type }}s col-sm-6 col-md-4{{ not versionTypeLength ? ' hidden-xs' }}">
                     <p class="link-type">{{ ('link_type.' ~ type)|trans }}</p>
-                    {% if versionTypeLength %}
+                    {% if not versionTypeLength %}
+                        <p class="no-links">None</p>
+                    {% else %}
                         <ul>
                             {%- for link in attribute(version, type) -%}
                                 <li>{{ packagist.packageLink(link.packageName, type) }}: {{ link.packageVersion == 'self.version' ? version.version : link.packageVersion }}</li>
                             {%- endfor -%}
                         </ul>
-                    {% else %}
-                        <p class="no-links">None</p>
                     {% endif %}
                 </div>
             {% endfor %}
